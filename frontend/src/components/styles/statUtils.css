@@ -1,71 +1,83 @@
-/* statUtils.css */
-
 /* Container for the stats */
 .stats-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px; /* Adjust spacing between stat boxes */
-    padding: 16px;
-  }
-  
-  /* Individual stat card styling */
-  .stat-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 200px; /* Fixed height for the stat boxes */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distributes space between the elements */
-    overflow: hidden; /* Hide overflowing content */
-  }
-  
-  /* Stat name styling */
-  .stat-card strong {
-    font-size: 1.2em;
-    color: #333;
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  /* Stat value styling */
-  .stat-value {
-    font-size: 2em; /* Larger font size for the stat value */
-    color: #000;
-    margin-bottom: 8px; /* Space between the stat value and the list of skills */
-  }
-  
-  /* List of skills styling */
-  .stat-card ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.9em;
-    color: #666;
-    margin-top: auto; /* Pushes the list to the bottom */
-  }
-  
-  /* Individual skill item styling */
-  .stat-card li {
-    margin-bottom: 4px;
-  }
-  
-  /* Button styling */
-  .roll-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 16px;
-  }
-  
-  /* Button hover effect */
-  .roll-button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller minimum width for each card */
+  gap: 16px; /* Space between stat boxes */
+  padding: 16px;
+}
+
+/* Individual stat card styling */
+.stat-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px; /* Reduced padding for smaller cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 180px; /* Fixed height for the stat cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes space between elements */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+/* Stat name and value container */
+.stat-info {
+  display: flex;
+  justify-content: space-between; /* Space between stat name and stat value */
+  align-items: center; /* Align items vertically center */
+}
+
+/* Stat name styling */
+.stat-name {
+  font-size: 1.1em; /* Slightly smaller font size */
+  color: #333;
+  margin-right: 8px; /* Space between stat name and value */
+}
+
+/* Stat value styling */
+.stat-value {
+  font-size: 1.8em; /* Slightly smaller font size for the stat value */
+  color: #000;
+  text-align: right; /* Right-align the stat value */
+}
+
+/* List of skills styling */
+.stat-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85em; /* Smaller font size for skills */
+  color: #666;
+  margin-top: auto; /* Pushes the list to the bottom */
+}
+
+/* Individual skill item styling */
+.stat-card li {
+  margin-bottom: 4px;
+}
+
+/* Button styling */
+.roll-button {
+  padding: 8px 16px; /* Reduced padding for a smaller button */
+  font-size: 0.9em; /* Slightly smaller font size */
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 16px;
+  display: block; /* Ensures the button is on its own line */
+  width: fit-content; /* Adjust width based on content */
+  margin-left: auto; /* Center horizontally within the container */
+  margin-right: auto; /* Center horizontally within the container */
+}
+
+/* Button hover effect */
+.roll-button:hover {
+  background-color: #0056b3;
+}
+
+.roll-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

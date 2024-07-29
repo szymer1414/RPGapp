@@ -132,9 +132,11 @@ export const StatsSection = ({ stats, setStats, skills, setSkills }) => {
       <div className="stats-container">
         {statNames.length > 0 && statNames.map((stat, index) => (
           <div key={stat.stat_id} className="stat-card">
-            <strong>{stat.name}</strong>
-            <div className="stat-value">
-              {stats[index] !== undefined ? stats[index] : "0"}
+            <div className="stat-info">
+              <span className="stat-name">{stat.name}</span>
+              <span className="stat-value">
+                {stats[index] !== undefined ? stats[index] : "0"}
+              </span>
             </div>
             <ul>
               {skills.find(s => s.statId === stat.stat_id)?.skills.map((skill, idx) => (

@@ -1,62 +1,98 @@
-/* App.css */
+/* General Page Layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
 .App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px; /* Adjust the width as needed */
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.navbar a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+  opacity: 0.7;
+}
+
+.navbar a:hover {
+  opacity: 1;
+}
+
+.content {
+  margin-left: 100px; /* Same as the width of the navbar */
+  padding: 20px;
+}
+
+/* Additional Styles for CharacterDetail */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.main-content {
   display: grid;
-  grid-template-areas: 
-    "country-name traits"
-    "stats stats";
-  grid-template-columns: 1fr 2fr; /* Adjust columns for the top row */
-  grid-template-rows: auto 1fr; /* Adjust rows for content */
-  gap: 20px; /* Space between items */
-  padding: 20px; /* Overall padding */
-  height: 100vh; /* Full viewport height */
-  box-sizing: border-box; /* Ensure padding is included in height */
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.country-name {
-  grid-area: country-name; /* Positioning for the country and name section */
-  border: 1px solid black; /* Optional: Add a border for visibility */
-  padding: 10px; /* Optional: Add padding */
+.origins,
+.traits {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
 }
 
-.traits-container {
-  grid-area: traits; /* Positioning for the traits section */
-  border: 1px solid black; /* Optional: Add a border for visibility */
-  padding: 10px; /* Optional: Add padding */
+.skills-stats {
+  grid-column: 1 / -1; /* Span across both columns */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
-.stats-container {
-  grid-area: stats; /* Positioning for the stats section */
-  display: flex; /* Use flexbox to arrange stat cards */
-  flex-wrap: wrap; /* Allow wrapping if needed */
-  justify-content: center; /* Center the stat cards horizontally */
-  gap: 20px; /* Space between stat cards */
-  width: 100%; /* Make sure the stats container takes the full width */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+.save-button {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.stat-card {
-  border: 2px solid black; /* Style for individual stats */
-  padding: 10px; /* Adjust as needed */
-  text-align: center; /* Center-align text */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
-  width: 220px; /* Fixed width for each stat card */
-  min-height: 150px; /* Optional: Set a minimum height */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: not-allowed; /* Button does nothing when clicked */
 }
 
-.roll-button {
-  display: block; /* Make the button a block element */
-  margin: 20px auto; /* Center the button horizontally with spacing */
-  padding: 10px 20px; /* Adjust padding as needed */
-  cursor: pointer; /* Change cursor on hover */
-  text-align: center; /* Center-align text within the button */
-  background-color: #007bff; /* Button background color */
-  color: white; /* Button text color */
-  border: none; /* Remove default button border */
-  border-radius: 4px; /* Add rounded corners */
-  font-size: 16px; /* Adjust font size */
+button:disabled {
+  background-color: #cccccc;
 }
 
-.roll-button:hover {
-  background-color: #0056b3; /* Darker background color on hover */
+.skill-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.skill-item span {
+  margin-right: 5px;
 }

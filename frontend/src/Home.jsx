@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import TraitsList from "./components/TraitsList";
 import { generateStats, StatsSection } from "./components/statUtils";
 import { rollCountry, rollNameAndSurname, OriginSection } from "./components/originUtils";
-import "./App.css";
+import "./styles/Home.css";
 import axios from "axios";
 
-const App = () => {
+const Home = () => {
   const [rolledCountry, setRolledCountry] = useState(null);
   const [rolledName, setRolledName] = useState(null);
   const [rolledSurname, setRolledSurname] = useState(null);
@@ -64,23 +64,28 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <div className="country-name">
-        <OriginSection 
-          rolledCountry={rolledCountry}
-          rolledName={rolledName}
-          rolledSurname={rolledSurname}
-          onRollCountry={handleRollCountry}
-        />
+    <div className="home">
+      <div className="columns">
+        <div className="column">
+          <OriginSection 
+            rolledCountry={rolledCountry}
+            rolledName={rolledName}
+            rolledSurname={rolledSurname}
+            onRollCountry={handleRollCountry}
+          />
+        </div>
+        <div className="column">
+          <TraitsList setTraits={setTraits} />
+        </div>
       </div>
-      <div className="traits-container">
-        <TraitsList setTraits={setTraits} />
+      <div className="full-width">
+        <StatsSection stats={stats} setStats={setStats} skills={skills} setSkills={setSkills} />
       </div>
-
-      <StatsSection stats={stats} setStats={setStats} skills={skills} setSkills={setSkills} />
-      <button onClick={saveToDatabase} className="save-button">Save to Database</button>
+      <div className="save-container">
+        <button onClick={saveToDatabase} className="save-button">Save to Database</button>
+      </div>
     </div>
   );
 };
 
-export default App;
+export default Home;

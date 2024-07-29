@@ -1,0 +1,49 @@
+/* General Layout for Home Page */
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+  }
+  
+  .column {
+    width: 48%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .full-width {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .save-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: not-allowed; /* Button does nothing when clicked */
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+  }
+  

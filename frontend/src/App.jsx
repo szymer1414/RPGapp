@@ -8,15 +8,17 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <Link to="/">Homee</Link><br></br>
+        <nav className="navbar">
+          <Link to="/">Home</Link><br></br>
           <Link to="/characters">Characters</Link>
         </nav>
+        <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/characters" element={<CharacterList />} />
           <Route path="/character/:id" element={<CharacterDetail />} />
         </Routes>
+        </div>
       </div>
     </Router>
   );
