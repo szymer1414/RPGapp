@@ -1,0 +1,52 @@
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+    gap: 20px; /* Spacing between grid items */
+    margin-top: 20px;
+  }
+  
+  .stat-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .stat-item strong {
+    display: block;
+    margin-bottom: 35px;
+  }
+  .stat-item {
+    margin-bottom: 20px;
+  }
+  
+  .stat-item ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .stat-item li {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: flex-end; /* Align items to the right */
+    margin-bottom: 10px; /* Space between items */
+  }
+  
+  .stat-item li strong {
+    margin-right: 52px; /* Space between skill name and button */
+  }
+  
+  .stat-item li button {
+    padding: 5px 10px; /* Button padding */
+    border: none; /* Remove default border */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor */
+  }
+  
+  .stat-item li button:disabled {
+    background-color: #6c757d; /* Disabled button color */
+    cursor: not-allowed; /* Disabled cursor */
+  }
+  

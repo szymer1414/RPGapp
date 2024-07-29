@@ -1,0 +1,28 @@
+INSERT INTO npc (
+    name_id, surname_id, country_id, brawn, agility, intellect, cunning, willpower, presence,
+    poczytalnosc, szczescie,
+    atletyka, odpornosc, bijatyka, bron_dwureczna, lucznictwo,
+    machlojki, koordynacja, bron_lekka, rewolwery, rzucanie, karabiny,
+    mity, astronawigacja, geografia, wycena, natura, alchemia, medycyna, artylery,
+    pierwsza_pomoc, pismiennosc, ukrywanie, orientacja, przeszukiwanie, oszustwo,
+    czujnosc, opanowanie, przymuszenie,
+    urok, dowodzenie, negocjacje, jezyki_obce,
+    traits, feats
+) VALUES (
+    1, 1, 1,  -- name_id, surname_id, country_id
+    4, 3, 5, 2, 1, 4,  -- główne atrybuty
+    80, 60,  -- poczytalnosc, szczescie
+    3, 2, 4, 1, 5,  -- skille brawn
+    3, 4, 2, 5, 3, 4,  -- skille agility
+    5, 4, 3, 2, 1, 5, 4, 3,  -- skille intellect
+    4, 3, 5, 2, 1, 4,  -- skille cunning
+    3, 2, 1,  -- skille willpower
+    4, 5, 2, 3,  -- skille presence
+    JSON_ARRAY(
+        JSON_OBJECT('name', 'Brave', 'description', 'Fearless in battle'),
+        JSON_OBJECT('name', 'Cunning', 'description', 'Clever and deceitful')
+    ),
+    JSON_ARRAY(
+        JSON_OBJECT('name', 'Sharp Shooter', 'description', 'Excellent at ranged combat', 'skill_modifiers', JSON_OBJECT('karabiny', 2))
+    )
+);

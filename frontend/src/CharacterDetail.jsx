@@ -1,0 +1,102 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import './styles/CharacterDetail.css'; // Import the CSS file for styling
+
+const CharacterDetail = () => {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+
+  const fetchCharacterDetail = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8081/api/characters/${id}`);
+      // Ensure each skill has a 'disabled' field initially set to false
+      const updatedCharacter = {
+        ...response.data,
+        stats: response.data.stats.map(stat => ({
+          ...stat,
+          skills: stat.skills.map(skill => ({
+            ...skill,
+            disabled: false
+          }))
+        }))
+      };
+      setCharacter(updatedCharacter);
+    } catch (error) {
+      console.error('Error fetching character details:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCharacterDetail();
+  }, [id]);
+
+  const handleButtonClick = (statId, skillId) => {
+    setCharacter(prevCharacter => {
+      const updatedStats = prevCharacter.stats.map(stat => {
+        if (stat.stat_id === statId) {
+          const updatedSkills = stat.skills.map(skill =>
+            skill.skill_id === skillId
+              ? { ...skill, disabled: true }
+              : skill
+          );
+          return { ...stat, skills: updatedSkills };
+        }
+        return stat;
+      });
+      return { ...prevCharacter, stats: updatedStats };
+    });
+  };
+
+  if (!character) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h1>Character Detail</h1>
+      <p>ID: {character.npc_id}</p>
+      <p>Name: {character.first_name}</p>
+      <p>Surname: {character.last_name}</p>
+
+      <h2>Traits</h2>
+      <ul>
+        {character.traits.map(trait => (
+          <li key={trait.trait_id}>
+            <strong>{trait.trait_name}</strong>: {trait.description}
+          </li>
+        ))}
+      </ul>
+
+      <h2>Stats</h2>
+      <div className="stats-grid">
+        {character.stats.map(stat => (
+          <div className="stat-item" key={stat.stat_id}>
+            <strong>{stat.stat_name}</strong>
+            <p>Proficiency Level: {stat.proficiency_level}</p>
+            <h3>Skills</h3>
+            <ul>
+              {stat.skills.length > 0 ? (
+                stat.skills.map(skill => (
+                  <li key={skill.skill_id}>
+                    <strong>{skill.skill_name}</strong>
+                    <button 
+                      onClick={() => handleButtonClick(stat.stat_id, skill.skill_id)}
+                      disabled={skill.disabled} // Disable button if clicked
+                    >
+                      {skill.value} {/* Set button text to skill value */}
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <li>No skills found</li>
+              )}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default CharacterDetail;

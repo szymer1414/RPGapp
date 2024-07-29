@@ -1,0 +1,36 @@
+.traits-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.trait-card {
+  border: 2px solid black;
+  padding: 5px; /* Reduced padding */
+  margin: 5px; /* Reduced margin */
+  width: 160px;
+  height: 80px; /* Fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center-align vertically */
+  align-items: center; /* Center-align horizontally */
+  text-align: center; /* Center-align text */
+}
+
+.trait-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px; /* Smaller font size */
+}
+
+.trait-description {
+  margin-top: 5px;
+  font-size: 12px; /* Smaller font size */
+}
+
+.roll-button {
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px; /* Smaller font size for button text */
+}
