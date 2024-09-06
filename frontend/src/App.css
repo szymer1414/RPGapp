@@ -11,33 +11,35 @@ body {
   height: 100vh;
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100px; /* Adjust the width as needed */
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  z-index: 1000;
+.topbar {
+  position: fixed; /* Fixes the topbar in place */
+  top: 0; /* Aligns it to the top of the page */
+  left: 0; /* Aligns it to the left side of the page */
+  width: 100%; /* Full width of the viewport */
+  background-color: #f0f0f0; /* Background color (optional) */
+  padding: 10px 20px; /* Padding for some spacing */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional shadow for visual effect */
+  z-index: 1000; /* Ensures the topbar stays on top of other elements */
+  display: grid; /* Use grid for layout */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Create responsive columns */
+  gap: 10px; /* Spacing between columns */
+  align-items: center; /* Center items vertically */
 }
 
-.navbar a {
-  margin-bottom: 20px;
-  text-decoration: none;
-  color: black;
-  opacity: 0.7;
+.topbar a {
+  text-decoration: none; /* Remove underline from links */
+  color: #333; /* Text color */
+  text-align: center; /* Center text within links */
 }
 
-.navbar a:hover {
+.topbar a:hover {
   opacity: 1;
 }
 
 .content {
-  margin-left: 100px; /* Same as the width of the navbar */
-  padding: 20px;
+
+  padding: 30px;
+  padding-top: 60px;
 }
 
 /* Additional Styles for CharacterDetail */
@@ -64,7 +66,8 @@ body {
 }
 
 .skills-stats {
-  grid-column: 1 / -1; /* Span across both columns */
+  grid-column: 1 / -1;
+  /* Span across both columns */
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -79,7 +82,8 @@ body {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  cursor: not-allowed; /* Button does nothing when clicked */
+  cursor: not-allowed;
+  /* Button does nothing when clicked */
 }
 
 button:disabled {
