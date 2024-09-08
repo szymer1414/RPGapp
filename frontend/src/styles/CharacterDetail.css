@@ -1,52 +1,101 @@
+/* General layout and padding */
+.character-detail-content {
+  padding: 20px;
+}
+
+/* Stats grid layout - flex to keep all stats in a row */
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
-    gap: 20px; /* Spacing between grid items */
-    margin-top: 20px;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px; /* Space between stat items */
+}
+
+/* Styling for each stat item */
+.stat-item {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 12px;
+  flex: 1;
+  min-width: 14%; /* Adjust this percentage to fit 6 items in a row */
+  max-width: 14%;
+  text-align: left; /* Align text to the left */
+  font-size: 0.45rem; /* Smaller text size */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stat item text size */
+.stat-item strong {
+  font-size: 0.8rem; /* Smaller stat name font size */
+}
+
+.stat-item p {
+  font-size: 0.6rem; /* Smaller proficiency level text */
+}
+
+.stat-item h3 {
+  font-size: 0.8rem; /* Smaller skill header font size */
+}
+
+/* Skill list and list items */
+.stat-item ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px;
+  font-size: 0.4rem; /* Smaller font size for skill items */
+}
+
+.stat-item li {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between; /* Align text left and button right */
+  align-items: center;
+}
+
+/* Button styling - aligned to the left */
+.stat-item button {
+  font-size: 0.6rem; /* Smaller button text */
+  padding: 5px 8px; /* Smaller button size */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Disabled button styling */
+.proficiency-button:disabled {
+  background-color: #ccc; /* Grey background for disabled buttons */
+  cursor: not-allowed;
+}
+
+/* Stat header for alignment of button and text */
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Align the stat button to the left */
+.stat-header button {
+  margin-right: auto; /* Align button to the left */
+}
+
+/* Horizontal line style */
+.stat-item hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
   .stat-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    background-color: #f9f9f9;
+    min-width: 45%; /* Adjust for smaller screens */
+    max-width: 45%;
   }
-  
-  .stat-item strong {
-    display: block;
-    margin-bottom: 35px;
-  }
-  .stat-item {
-    margin-bottom: 20px;
-  }
-  
-  .stat-item ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .stat-item li {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center align items vertically */
-    justify-content: flex-end; /* Align items to the right */
-    margin-bottom: 10px; /* Space between items */
-  }
-  
-  .stat-item li strong {
-    margin-right: 52px; /* Space between skill name and button */
-  }
-  
-  .stat-item li button {
-    padding: 5px 10px; /* Button padding */
-    border: none; /* Remove default border */
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    cursor: pointer; /* Pointer cursor */
-  }
-  
-  .stat-item li button:disabled {
-    background-color: #6c757d; /* Disabled button color */
-    cursor: not-allowed; /* Disabled cursor */
-  }
-  
+}
