@@ -18,6 +18,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/characters" element={<CharacterList />} />
           <Route path="/character/:id/*" element={<CharacterDetail />} />
+        
         </Routes>
         </div>
       </div>

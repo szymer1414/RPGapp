@@ -12,6 +12,9 @@ const CharacterDetail = () => {
   const [character, setCharacter] = useState(null);
   const location = useLocation(); // Get the current route
 
+  // Check if the current route is the ChangeStats page
+  const isChangeStatsPage = location.pathname === `/character/${id}/change-stats`;
+
   const fetchCharacterDetail = async () => {
     try {
       const response = await axios.get(`http://localhost:8081/api/characters/${id}`);
@@ -21,10 +24,6 @@ const CharacterDetail = () => {
           ...stat,
           // Sort skills based on proficiency_level in descending order
           skills: stat.skills
-            .map(skill => ({
-              ...skill,
-              disabled: true
-            }))
             .sort((a, b) => b.value - a.value) // Sorting skills based on proficiency level (b - a for descending)
         }))
       };
@@ -38,39 +37,19 @@ const CharacterDetail = () => {
     fetchCharacterDetail();
   }, [id]);
 
-  const handleButtonClick = (statId, skillId) => {
-    setCharacter(prevCharacter => {
-      const updatedStats = prevCharacter.stats.map(stat => {
-        if (stat.stat_id === statId) {
-          const updatedSkills = stat.skills.map(skill =>
-            skill.skill_id === skillId
-              ? { ...skill, disabled: true }
-              : skill
-          );
-          return { ...stat, skills: updatedSkills };
-        }
-        return stat;
-      });
-      return { ...prevCharacter, stats: updatedStats };
-    });
-  };
-
   if (!character) {
     return <div>Loading...</div>;
   }
 
   // Conditionally render content based on the route
-  const isChangeStatsPage = location.pathname === `/character/${id}/change-stats`;
-  const isChangeDataPage = location.pathname === `/character/${id}/change-data`;
   const isBaseCharacterPage = location.pathname === `/character/${id}`;
 
   return (
     <div className="character-detail-page">
       <Sidebar />
       <div className="character-detail-content">
-
         {/* Show Character Info (Traits and Basic Info) only on the base route or change-data */}
-        {(isBaseCharacterPage || isChangeDataPage) && (
+        {(isBaseCharacterPage ) && (
           <>
             <h1>Character Detail</h1>
             <p>ID: {character.npc_id}</p>
@@ -88,8 +67,8 @@ const CharacterDetail = () => {
           </>
         )}
 
-        {/* Show Stats only on the change-stats route or base route */}
-        {(isBaseCharacterPage || isChangeStatsPage) && (
+        {/* Show Stats only on the base character detail page, not on ChangeStats */}
+        {isBaseCharacterPage && (
           <>
             <h2>Stats</h2>
             <div className="stats-grid">
@@ -98,14 +77,16 @@ const CharacterDetail = () => {
                   <div className="stat-header">
                     <strong>{stat.stat_name}</strong>
                     <button
-                      onClick={() => handleStatButtonClick(stat.stat_id)}
-                      disabled={stat.disabled}
+                      disabled  // Disable button since we're on base page
                       className="proficiency-button"
-                      style={{ marginLeft: 'auto' }} // Align to the right
+                      style={{
+                        marginRight: '0',
+                        backgroundColor: stat.proficiency_level === 0 ? '#fff' : '#4CAF50',
+                        color: stat.proficiency_level === 0 ? '#000' : '#fff'
+                      }}
                     >
                       {stat.proficiency_level}
                     </button>
-
                   </div>
                   <hr />
                   <ul>
@@ -114,8 +95,7 @@ const CharacterDetail = () => {
                         <li key={skill.skill_id}>
                           <strong>{skill.skill_name}</strong>
                           <button
-                            onClick={() => handleButtonClick(stat.stat_id, skill.skill_id)}
-                            disabled={skill.disabled}
+                            disabled  // Disable button since we're on base page
                             style={{
                               color: skill.value === 0 ? '#fff' : '#4CAF50', // Text color based on skill value
                             }}
@@ -135,9 +115,7 @@ const CharacterDetail = () => {
         )}
 
         <Routes>
-          <Route path="change-data" element={<ChangeData />} />
-          <Route path="change-stats" element={<ChangeStats />} />
-          {/* Add other routes for "Level Up" and "Remove Character" */}
+          <Route path="change-stats" element={<ChangeStats character={character} setCharacter={setCharacter} />} />
         </Routes>
       </div>
     </div>
