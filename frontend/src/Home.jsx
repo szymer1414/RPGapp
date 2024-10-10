@@ -58,8 +58,10 @@ const Home = () => {
 
       const response = await axios.post("http://localhost:8081/save-npc", npcData);
       console.log("NPC saved successfully with ID:", response.data.npcId);
+      alert(`NPC saved successfully!\nID: ${response.data.npcId}`);
     } catch (error) {
       console.error("Error saving NPC:", error);
+      alert("Error saving NPC. Please try again."); // Show error alert
     }
   };
 
@@ -67,7 +69,7 @@ const Home = () => {
     <div className="home">
       <div className="columns">
         <div className="column">
-          <OriginSection 
+          <OriginSection
             rolledCountry={rolledCountry}
             rolledName={rolledName}
             rolledSurname={rolledSurname}

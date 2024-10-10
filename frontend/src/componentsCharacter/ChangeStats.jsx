@@ -24,39 +24,55 @@ const ChangeStats = ({ character, setCharacter }) => {
         if (stat.stat_id === statId) {
           const updatedSkills = stat.skills.map(skill => {
             if (skill.skill_id === skillId) {
-              const updatedSkillValue = increment
-                ? Math.min(skill.value + 1, 5) // Ensure it doesn't exceed 5
-                : Math.max(skill.value - 1, 0); // Ensure it doesn't go below 0
-              return { ...skill, value: updatedSkillValue };
+              const newValue = increment
+                ? Math.min(skill.value + 1, 5) // Increase, cap at 5
+                : Math.max(skill.value - 1, 0); // Decrease, floor at 0
+
+              return { ...skill, value: newValue };  // Update the skill value
             }
-            return skill;
+            return skill;  // Return unchanged skill
           });
-          return { ...stat, skills: updatedSkills };
+          return { ...stat, skills: updatedSkills };  // Return the updated stat with modified skills
         }
-        return stat;
+        return stat;  // Return unchanged stat
       });
-      return { ...prevCharacter, stats: updatedStats };
+      return { ...prevCharacter, stats: updatedStats };  // Return updated character with modified stats
     });
   };
 
   // Save changes to the server
-  const saveChanges = async () => {
-    try {
-      await axios.put(`http://localhost:8081/api/characters/${character.npc_id}`, character);
-      alert('Changes saved successfully!');
-    } catch (error) {
-      console.error('Error saving changes:', error);
-      alert('Failed to save changes. Please try again.');
-    }
+  const saveChanges = () => {
+    const updatedStats = character.stats.map(stat => ({
+      stat_id: stat.stat_id,
+      proficiency_level: stat.proficiency_level
+    }));
+
+    const updatedSkills = character.stats.flatMap(stat =>
+      stat.skills.map(skill => ({
+        skill_id: skill.skill_id,
+        proficiency_level: skill.value
+      }))
+    );
+
+    axios.put(`http://localhost:8081/api/characters/${character.npc_id}`, {
+      stats: updatedStats,
+      skills: updatedSkills
+    })
+      .then(response => {
+        console.log('Update successful:', response.data);
+        alert("NPC Changed"); // Show error alert
+      })
+      .catch(error => {
+        console.error('Error updating character:', error);
+      });
   };
+
 
   // Get button color based on value
   const getButtonStyle = (value) => {
-    
-    if (value === 0) return { backgroundColor: '#fff', color: '#000',marginRight: '0' }; // White with black text
-    if (value === 5) return { backgroundColor: '#FFD700', color: '#000', marginRight: '0'}; // Gold with black text
-    return { backgroundColor: '#4CAF50', color: '#fff',  marginRight: '0', }; // Green with white text
-    
+    if (value === 0) return { backgroundColor: '#fff', color: '#000', marginRight: '0' }; // White with black text
+    if (value === 5) return { backgroundColor: '#FFD700', color: '#000', marginRight: '0' }; // Gold with black text
+    return { backgroundColor: '#4CAF50', color: '#fff', marginRight: '0' }; // Green with white text
   };
 
   return (
