@@ -24,7 +24,7 @@ const CharacterDetail = () => {
           ...stat,
           // Sort skills based on proficiency_level in descending order
           skills: stat.skills
-            .sort((a, b) => b.value - a.value) // Sorting skills based on proficiency level (b - a for descending)
+            .sort((a, b) => a.skill_id - b.skill_id) // Sorting skills based on proficiency level (b - a for descending)
         }))
       };
       setCharacter(updatedCharacter);
